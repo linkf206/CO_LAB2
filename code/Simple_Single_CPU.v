@@ -18,19 +18,19 @@ input         clk_i;
 input         rst_i;
 
 //Internal Signles
-
+wire [32-1:0] pc_out;
 
 //Greate componentes
 ProgramCounter PC(
         .clk_i(clk_i),      
 	    .rst_i(rst_i),     
 	    .pc_in_i() ,   
-	    .pc_out_o() 
+	    .pc_out_o(pc_out) 
 	    );
 	
 Adder Adder1(
-        .src1_i(),     
-	    .src2_i(),     
+        .src1_i(32'd4),     
+	    .src2_i(pc_out),     
 	    .sum_o()    
 	    );
 	

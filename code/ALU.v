@@ -32,12 +32,16 @@ wire             zero_o;
 //Parameter
 
 //Main function
-
+assign Zero = (result_o == 0);
+always @(*) begin
+	case (ctrl_i)
+		0: result_o <= src1_i & src2_i;
+		1: result_o <= src1_i | src2_i;
+		2: result_o <= src1_i + src2_i;
+		6: result_o <= src1_i - src2_i;
+		7: result_o <= (src1_i < src2_i)?1 : 0;
+		12: result_o <= ~(src1_i | src2_i);
+		default: result_o <= 0;
+	endcase
+end
 endmodule
-
-
-
-
-
-                    
-                    

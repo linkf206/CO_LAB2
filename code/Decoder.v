@@ -38,7 +38,11 @@ reg            Branch_o;
 
 
 //Main function
-
+assign RegWrite_o = (instr_op_i == 'd0) | (instr_op_i == 'd8) | (instr_op_i == 'd10);
+//assign ALU_op_o
+assign ALUSrc_o = (instr_op_i == 'd8 | instr_op_i == 'd10)? 1 : 0;
+assign RegDst_o = (instr_op_i == 'd0)? 1 : 0;
+assign Branch_o = (instr_op_i == 'd4)? 1 : 0;
 endmodule
 
 
