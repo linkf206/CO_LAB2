@@ -32,7 +32,7 @@ wire             zero_o;
 //Parameter
 
 //Main function
-assign Zero = (result_o == 0);
+assign zero_o = (result_o == 0);
 always @(*) begin
 	case (ctrl_i)
 		0: result_o <= src1_i & src2_i;

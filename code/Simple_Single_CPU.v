@@ -2,7 +2,7 @@
 //--------------------------------------------------------------------------------
 //Version:     1
 //--------------------------------------------------------------------------------
-//Writer:      
+//Writer:      0710003林克帆
 //----------------------------------------------
 //Date:        
 //----------------------------------------------
@@ -11,11 +11,13 @@
 module Simple_Single_CPU(
         clk_i,
 		rst_i
+		,debug
 		);
 		
 //I/O port
 input         clk_i;
 input         rst_i;
+output        debug;
 
 //Internal Signles
 wire [32-1:0] pc_in;
@@ -39,12 +41,15 @@ wire          Branch;
 wire          zero;
 wire          beq;
 
+wire [33-1:0] debug;
+
 assign beq = Branch & zero;
+assign debug = {ALU_result, zero};
 //Greate componentes
 ProgramCounter PC(
         .clk_i(clk_i),      
 	    .rst_i(rst_i),     
-	    .pc_in_i(pc_in) ,   
+	    .pc_in_i(pc_in),   
 	    .pc_out_o(pc_out) 
 	    );
 	
@@ -90,7 +95,7 @@ Decoder Decoder(
 ALU_Ctrl AC(
         .funct_i(instr_out[5:0]),   
         .ALUOp_i(ALU_op),   
-        .ALUCtrl_o(ALUCtrl_out) 
+        .ALUCtrl_o(ALUCtrl) 
         );
 	
 Sign_Extend SE(
