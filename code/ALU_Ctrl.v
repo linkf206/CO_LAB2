@@ -28,6 +28,23 @@ reg        [4-1:0] ALUCtrl_o;
 
        
 //Select exact operation
+always @(funct_i, ALUOp_i) begin
+	if(ALUOp_i == 'b010) begin
+		case(funct_i)
+			32: ALUCtrl_o <= 2;
+			34: ALUCtrl_o <= 6;
+			36: ALUCtrl_o <= 0;
+			37: ALUCtrl_o <= 1;
+			42: ALUCtrl_o <= 7;
+		endcase
+	end
+	else if(ALUOp_i == 'b110)
+		ALUCtrl_o <= 2;
+	else if(ALUOp_i == 'b111)
+		ALUCtrl_o <= 7;
+	else if(ALUOp_i == 'b001)
+		ALUCtrl_o <= 6;
+end
 
 endmodule     
 
